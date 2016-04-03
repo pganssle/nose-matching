@@ -1,0 +1,7 @@
+# Set the default behavior
+* text eol=lf
+
+# Specify what's text
+*.py text
+*.cfg text
+*.yml text
