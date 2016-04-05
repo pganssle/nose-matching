@@ -7,10 +7,10 @@ from nose.selector import Selector
 from nose.plugins import Plugin
 
 
-class FilterSelector(Selector):
+class MatchSelector(Selector):
     """ Special selector to allow selective running of tests filtered by method name. """
     def configure(self, config):
-        super(FilterSelector, self).configure(config)
+        super(MatchSelector, self).configure(config)
 
         self.classMatch = getattr(config, 'classMatch', None)
         self.directoryMatch = getattr(config, 'directoryMatch', None)
@@ -26,26 +26,26 @@ class FilterSelector(Selector):
             return match.search(mstr)
 
     def wantClass(self, cls):
-        wanted = super(FilterSelector, self).wantClass(cls)
+        wanted = super(MatchSelector, self).wantClass(cls)
 
         return self._apply_match(wanted, self.classMatch, cls.__name__)
 
     def wantDirectory(self, dirname):
-        wanted = super(FilterSelector, self).wantDirectory(dirname)
+        wanted = super(MatchSelector, self).wantDirectory(dirname)
 
         dirname = path.basename(dirname)
 
         return self._apply_match(wanted, self.directoryMatch, dirname)
     
     def wantFile(self, fname):
-        wanted = super(FilterSelector, self).wantFile(fname)
+        wanted = super(MatchSelector, self).wantFile(fname)
 
         fname = path.basename(fname)
 
         return self._apply_match(wanted, self.fileMatch, fname)
 
     def wantFunction(self, function):
-        wanted = super(FilterSelector, self).wantFunction(function)
+        wanted = super(MatchSelector, self).wantFunction(function)
 
         if wanted:
             if hasattr(function, 'compat_func_name'):
@@ -58,12 +58,12 @@ class FilterSelector(Selector):
             return False
 
     def wantMethod(self, method):
-        wanted = super(FilterSelector, self).wantMethod(method)
+        wanted = super(MatchSelector, self).wantMethod(method)
 
         return self._apply_match(wanted, self.methodMatch, method.__name__)
 
     def wantModule(self, module):
-        wanted = super(FilterSelector, self).wantModule(module)
+        wanted = super(MatchSelector, self).wantModule(module)
 
         return self._apply_match(wanted, self.moduleMatch, module.__name__)
 
@@ -125,5 +125,5 @@ class Matching(Plugin):
         config.methodMatch = self.method_match_re
         config.moduleMatch = self.module_match_re
 
-        loader.selector = FilterSelector(config)
+        loader.selector = MatchSelector(config)
 
