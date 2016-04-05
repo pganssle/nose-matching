@@ -1,13 +1,7 @@
 nose-matching is a plugin for the [`nose`](https://nose.readthedocs.org/en/latest/) that allows for granular filtering of tests, allowing you to specify filters for tests using different matching logic for classes, directories, files, functions, methods and modules. These are applied *on top* of the normal `--match`, `--include` and `--exclude` logic.
 
 ## Installation
-As this is a plugin for [`nose`](https://nose.readthedocs.org/en/latest/), you should install that module first before this plugin. The plugin can be installed from PyPi using:
-
-```
-pip install nose-matching
-```
-
-You can also install this from the source with:
+As this is a plugin for [`nose`](https://nose.readthedocs.org/en/latest/), you should install that module first before this plugin. This is an alpha version and has not been released on PyPi yet. For now, you can install it by cloning the git repository and running the following command from the root directory:
 
 ```
 python setup.py install
